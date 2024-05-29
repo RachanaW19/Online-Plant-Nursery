@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'main' %}
+
+<!--main start-->
+<div class="row mt-5">
+    <div class="col-md-9">
+        {% for x in data %}
+        {% if forloop.counter == 1 %}
+        <h5 class="bg-danger-subtle p-2">Customer Details</h5>
+        <p><strong>Name:</strong>{{x.uid.username}}</p>
+        <p><strong>Mobile:</strong>9090909090</p>
+        <p><strong>Email:</strong>{{x.uid.email}}</p>
+        {% endif %}
+        {% endfor %}
+        <h5 class="bg-danger-subtle p-2">Plant Details</h5>
+        {% for x in data %}
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <img src="{{x.pid.pimage.url}}" width="70%" height="" alt="" />
+            </div>
+            <div class="col-md-8">
+                <p><h4 style="font-size: 30px; color: crimson;">{{x.pid.name}}</h4></p>
+                <p><strong>Price: &nbsp;&nbsp;</strong>Rs.{{x.pid.price}}</p>
+                {% if x.pid.cat == 1 %}
+                <p><strong>Category: &nbsp;&nbsp;</strong>Flowering Plants</p>
+                {% elif x.pid.cat == 2 %}
+                <p><strong>Category: &nbsp;&nbsp;</strong>Indoor Plants</p>
+                {% elif x.pid.cat == 3 %}
+                <p><strong>Category: &nbsp;&nbsp;</strong>Hanging Basket</p>
+                {% else %}
+                <p><strong>Category: &nbsp;&nbsp;</strong>Low Maintenance Plants</p>
+                {% endif %}
+                <p><strong>Description: &nbsp;&nbsp;</strong>{{x.pid.pdetails}}</p>
+                <br>              
+
+                <a href="/remove/{{x.id}}"><button class="btn btn-danger">Remove</button></a>         
+            </div>
+        </div><!--plant detail div-->
+        {% endfor %}
+    </div><!--customer & plant detail-->
+    <div class="col-md-3">
+        <h5 class="bg-danger-subtle p-2">Total Amount</h5>
+        <p><strong>Total({{n}} items)</strong>Rs.{{total}}</p>
+        <hr>
+        <p><strong>Total Amount:</strong>Rs.{{total}}</p>
+        <a href="/makepayment"><button class="btn btn-danger">Make Payment</button></a> 
+    </div><!--Total amount-->
+</div>
+
+<!--main end-->
+
+{% endblock 'main' %}

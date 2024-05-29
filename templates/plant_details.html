@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'main' %}
+<!--main start-->
+<div class="card mb-3 mt-3 align-content-center" style="max-width: 100%;">
+    <div class="row g-0">
+      {% for x in plants %}
+      <div class="col-md-5">
+        <img src="{{x.pimage.url}}" class="img-fluid rounded-start" width="80%" alt="...">
+      </div>
+      <div class="col-md-7">
+        <div class="card-body">
+            <p><h4 style="font-size: 30px; color: crimson;">{{x.name}}</h4></p>
+            <p class="card-text"><strong>Price: &nbsp;&nbsp;</strong>Rs.{{x.price}}</p>
+            {% if x.cat == 1 %}
+            <p class="card-text"><strong>Category: &nbsp;&nbsp;</strong>Flowering Plants</p>
+            {% elif x.cat == 2 %}
+            <p class="card-text"><strong>Category: &nbsp;&nbsp;</strong>Indoor Plants</p>
+            {% elif x.cat == 3 %}
+            <p class="card-text"><strong>Category: &nbsp;&nbsp;</strong>Hanging Basket</p>
+            {% else %}
+            <p class="card-text"><strong>Category: &nbsp;&nbsp;</strong>Low Maintenance Plants</p>
+            {% endif %}
+            <p class="card-text"><strong>Description: &nbsp;&nbsp;</strong>{{x.pdetails}}</p>
+            <br>
+            <a href="/addtocart/{{x.id}}"><button class="btn btn-danger">Add to Cart</button></a>&nbsp;&nbsp;
+            <a href="/viewcart"><button class="btn btn-danger">View Cart</button></a>&nbsp;&nbsp;
+            <a href="/"><button class="btn btn-danger">Shop More</button></a>&nbsp;&nbsp;
+            {% if success %}
+              <div class="alert alert-success">
+                  {{success}}
+              </div>
+            {% endif %}
+            {% if msg %}
+              <div class="alert alert-danger">
+                  {{msg}}
+              </div>
+            {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+<!--main end-->
+
+{% endblock 'main' %}
